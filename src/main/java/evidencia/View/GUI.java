@@ -61,6 +61,10 @@ public class GUI implements ActionListener {
         wrong.setBounds(10,110,300,25);
         loginPanel.add(wrong);
 
+        JLabel menoHeslo = new JLabel("prihlasovacie údaje sú: 123 ");
+        menoHeslo.setBounds(10,130,300,25);
+        loginPanel.add(menoHeslo);
+
         login.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
