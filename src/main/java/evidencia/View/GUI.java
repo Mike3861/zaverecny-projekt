@@ -11,7 +11,11 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Timer;
+import java.util.zip.ZipEntry;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+import javax.swing.event.ListDataListener;
+
 public class GUI implements ActionListener {
 
 
@@ -27,7 +31,7 @@ public class GUI implements ActionListener {
 
 
         JPanel loginPanel = new JPanel();
-        JFrame loginFrame = new JFrame();
+        JFrame loginFrame = new JFrame("Login");
         loginFrame.setSize(350,200);
         loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         loginFrame.setVisible(true);
@@ -65,7 +69,10 @@ public class GUI implements ActionListener {
         menoHeslo.setBounds(10,130,300,25);
         loginPanel.add(menoHeslo);
 
+
+
         login.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 String user = userText.getText();
@@ -73,7 +80,6 @@ public class GUI implements ActionListener {
 
                 if (user.equals("123") && password.equals("123")) {
                     loginFrame.dispose();
-
 
                     JFrame frame = new JFrame("Evidencia pracovnikov GUI");
                     frame.setMinimumSize(new Dimension(950, 400));
@@ -97,7 +103,7 @@ public class GUI implements ActionListener {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             Service ulozDoListu = new Service();
-                            System.out.println("zmeny v liste sa ulozili.");
+                            System.out.println("Zmeny v liste sa ulozili.");
                             try {
                                 ulozDoListu.ulozDoSuboru(CelkovyZoznam, "zoznam.ser");
                             } catch (IOException e1) {
@@ -127,6 +133,7 @@ public class GUI implements ActionListener {
                                 throw new RuntimeException(e2);
                             }
                         }
+
                     });
                     Zoznam = new DefaultListModel<>();
                     jList = new JList<>(Zoznam);
@@ -138,7 +145,7 @@ public class GUI implements ActionListener {
                     pridaj.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            JFrame framelEZ = new JFrame("nová evidencia");
+                            JFrame framelEZ = new JFrame("Nová evidencia");
                             framelEZ.setMinimumSize(new Dimension(900, 150));
                             framelEZ.setResizable(false);
                             framelEZ.setLocationRelativeTo(null);
@@ -156,7 +163,7 @@ public class GUI implements ActionListener {
                             osobneCislo.setHorizontalAlignment(JTextField.LEFT);
                             panelEZ.add(osobneCislo);
 
-                            JLabel labelDatumNarodenia = new JLabel("Datum narodenia");
+                            JLabel labelDatumNarodenia = new JLabel("Dátum narodenia");
                             labelDatumNarodenia.setBounds(120, 2, 100, 20);
                             panelEZ.add(labelDatumNarodenia);
 
@@ -165,7 +172,7 @@ public class GUI implements ActionListener {
                             datumNarodenia.setHorizontalAlignment(JTextField.LEFT);
                             panelEZ.add(datumNarodenia);
 
-                            JLabel labelDatumNastupu = new JLabel("Datum nastupu");
+                            JLabel labelDatumNastupu = new JLabel("Dátum nastupu");
                             labelDatumNastupu.setBounds(230, 2, 100, 20);
                             panelEZ.add(labelDatumNastupu);
 
@@ -252,7 +259,7 @@ public class GUI implements ActionListener {
                     Potvrd.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            JFrame framelEZ = new JFrame("úprava evidencie");
+                            JFrame framelEZ = new JFrame("Úprava evidencie");
                             framelEZ.setMinimumSize(new Dimension(900, 150));
                             framelEZ.setResizable(false);
                             framelEZ.setLocationRelativeTo(null);
@@ -270,7 +277,7 @@ public class GUI implements ActionListener {
                             osobneCislo.setHorizontalAlignment(JTextField.LEFT);
                             panelEZ.add(osobneCislo);
 
-                            JLabel labelDatumNarodenia = new JLabel("Datum narodenia");
+                            JLabel labelDatumNarodenia = new JLabel("Dátum narodenia");
                             labelDatumNarodenia.setBounds(120, 2, 100, 20);
                             panelEZ.add(labelDatumNarodenia);
 
@@ -279,7 +286,7 @@ public class GUI implements ActionListener {
                             datumNarodenia.setHorizontalAlignment(JTextField.LEFT);
                             panelEZ.add(datumNarodenia);
 
-                            JLabel labelDatumNastupu = new JLabel("Datum nastupu");
+                            JLabel labelDatumNastupu = new JLabel("Dátum nastupu");
                             labelDatumNastupu.setBounds(230, 2, 100, 20);
                             panelEZ.add(labelDatumNastupu);
 
@@ -341,12 +348,11 @@ public class GUI implements ActionListener {
                             osobneCislo.setText(vybranyList.getOsobnecislo());
                             datumNarodenia.setText(vybranyList.getDatumNarodenia());
                             datumNastupu.setText(vybranyList.getDatumNastupu());
-                           // titul.setText(vybranyList.getTitul().toString());
-                            comboTitul.setSelectedItem(vybranyList.getTitul());
+                            comboTitul.setSelectedIndex(vybranyList.getTitul().ordinal());
                             meno.setText(vybranyList.getMeno());
                             priezvisko.setText(vybranyList.getPriezvisko());
-                            // pohlavie.setText(vybranyList.getPohlavie().toString());
-                            // oddelenie.setText(vybranyList.getOddelenie().toString());
+                            comboPohlavie.setSelectedIndex(vybranyList.getPohlavie().ordinal());
+                            comboOddelenie.setSelectedIndex(vybranyList.getOddelenie().ordinal());
                             uloz.addActionListener(new ActionListener() {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
@@ -369,6 +375,56 @@ public class GUI implements ActionListener {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
                                     framelEZ.dispatchEvent(new WindowEvent(framelEZ, WindowEvent.WINDOW_CLOSING));
+                                }
+                            });
+                            JButton vymazList = new JButton("Vymaž túto evidenciu");
+                            vymazList.setBounds(5,75,205,20);
+                            panelEZ.add(vymazList);
+
+                            vymazList.addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+
+                                    JFrame frameVymaz = new JFrame("Úprava evidencie");
+                                    frameVymaz.setMinimumSize(new Dimension(300, 180));
+                                    frameVymaz.setResizable(false);
+                                    frameVymaz.setLocationRelativeTo(null);
+                                    frameVymaz.setVisible(true);
+                                    JPanel panelEZ = new JPanel();
+                                    panelEZ.setLayout(null);
+                                    frameVymaz.setContentPane(panelEZ);
+
+                                    JLabel otazka = new JLabel("Naozaj cheš vykonať túto zmenu v evidencii?");
+                                    otazka.setBounds(10,40,300,25);
+                                    frameVymaz.add(otazka);
+
+
+                                    JButton zmenyOK = new JButton("Áno");
+                                    zmenyOK.setBounds(30,80,100,20);
+                                    frameVymaz.add(zmenyOK);
+                                    zmenyOK.addActionListener(new ActionListener() {
+                                        @Override
+                                        public void actionPerformed(ActionEvent e) {
+                                            int selectedIndex = jList.getSelectedIndex();
+                                            CelkovyZoznam.remove(selectedIndex);
+                                            Zoznam.remove(selectedIndex);
+                                            jList.updateUI();
+                                            frameVymaz.dispatchEvent(new WindowEvent(frameVymaz, WindowEvent.WINDOW_CLOSING));
+                                            framelEZ.dispatchEvent(new WindowEvent(framelEZ, WindowEvent.WINDOW_CLOSING));
+
+                                        }
+                                    });
+                                    JButton nie = new JButton("Nie");
+                                    nie.setBounds(150,80,100,20);
+                                    nie.setBorder(new LineBorder(Color.BLACK));
+                                    frameVymaz.add(nie);
+
+                                    nie.addActionListener(new ActionListener() {
+                                        @Override
+                                        public void actionPerformed(ActionEvent e) {
+                                            frameVymaz.dispatchEvent(new WindowEvent(frameVymaz, WindowEvent.WINDOW_CLOSING));
+                                        }
+                                    });
                                 }
                             });
                         }
@@ -405,9 +461,9 @@ public class GUI implements ActionListener {
 
 
     }
-    //TODO vymazat evidenciu z listu
-    //TODO fixnut comboBox v edite
-    //TODO upravit nacitaj na log in
+    //TODO vymazat evidenciu z listu        done
+    //TODO fixnut comboBox v edite          done
+    //TODO prerobit Jlist na Jtable
 
 
 

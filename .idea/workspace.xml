@@ -7,6 +7,7 @@
     <list default="true" id="3eebcb0e-a6bf-4836-9323-46f27c2867d6" name="Changes" comment="záverečný projekt evidencia zamestnavatelov">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/evidencia/View/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/evidencia/View/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zoznam.ser" beforeDir="false" afterPath="$PROJECT_DIR$/zoznam.ser" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +36,9 @@
       </MavenImportingSettings>
     </option>
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
   <component name="ProjectId" id="2QZsm4TYSSIo6jsDKH3cAO1QJNq" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -60,6 +64,19 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="evidencia.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JTableTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="evidencia.View.JTableTest" />
+      <module name="ZaverecnyProjekt2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="evidencia.View.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -97,6 +114,7 @@
       <list>
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.ClockExample" />
+        <item itemvalue="Application.JTableTest" />
         <item itemvalue="Application.LOGINTEST" />
       </list>
     </recent_temporary>
@@ -117,7 +135,21 @@
       <option name="project" value="LOCAL" />
       <updated>1685987402318</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="záverečný projekt evidencia zamestnavatelov">
+      <created>1685990122672</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1685990122672</updated>
+    </task>
+    <task id="LOCAL-00003" summary="záverečný projekt evidencia zamestnavatelov">
+      <created>1685990387935</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1685990387935</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
